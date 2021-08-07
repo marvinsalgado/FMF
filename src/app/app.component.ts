@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import {DatosGenerales} from './models/datosGenerales';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -106,6 +107,8 @@ export class AppComponent {
       this.clubName = resultEqui.nombre;
       this.clubLogo = resultEqui.logo;
       this.final = 1;
+      Swal.fire('Se envio la información');
+
 
     }
   }
@@ -126,33 +129,29 @@ export class AppComponent {
   }
 
   pdf() {
-    const DATA = document.getElementById('generaless');
-    const doc = new jsPDF('p', 'pt', 'a4');
-    const options = {
-      background: 'white',
-      scale: 3
-    };
-    html2canvas(DATA, options).then((canvas) => {
+    const doc = new jsPDF();
+    doc.setTextColor(0, 255, 0);
+    doc.text('Evaluación Desarrollador Jr.!', 10, 10);
+    doc.setTextColor(0);
+    doc.text('Datos Generales', 10, 30);
+    doc.text('Nombre: ' + this.datosGenerales.value.nombre, 10, 40);
+    doc.text('Apellido Paterno: ' + this.datosGenerales.value.paterno, 10, 50);
+    doc.text('Apellido Paterno: ' + this.datosGenerales.value.materno, 10, 60);
+    doc.text('Género : ' + this.datepipe.transform(this.datosGenerales.value.fechaNacimiento, 'dd/MM/yyyy'), 10, 70);
+    doc.text('Nacionalidad : ' + this.nacionalidadName, 10, 80);
+    doc.text('Club de Fútbol: '  + this.clubName, 10, 90);
+    if (this.edad >= 18) {
+      doc.text('R.F.C.:' + this.datosGenerales.value.rfc, 10, 110);
+    }
+    doc.text('Ocupación: ' + this.datosGenerales.value.ocupacion, 10, 100);
 
-      const img = canvas.toDataURL('image/PNG');
-
-      // Add image Canvas to PDF
-      const bufferX = 15;
-      const bufferY = 15;
-      const imgProps = (doc as any).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
-      return doc;
-    }).then((docResult) => {
-      docResult.save(`${new Date().toISOString()}_tutorial.pdf`);
-    });
+    doc.save('FMF.pdf');
   }
 
 
 
   stepChanged(args: StepChangedArgs) {
-    console.log(args.step);
+    //console.log(args.step);
   }
 
   isValidFunctionReturnsBoolean(args: StepValidationArgs) {
