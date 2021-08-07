@@ -10,68 +10,288 @@
 
 <div class="content" role="main">
   <div fxLayout="column">
-    <div fxFlex="100">
-      <strong>Bienvenido a tu prueba de Desarrollador Jr. de la Federación Mexicana de Fútbol.</strong>
-    </div>
-    <div fxFlex="100" class="pt-10">
-      Estas son las actividades que debes realizar:
-    </div>
-    <div fxFlex="100" class="pt-10">
-      <ol>
-        <li>
-          Utilizar Angular 7 o superior.
-        </li>
-        <li>
-          Instalar la librería ng-wizard <a href="https://www.npmjs.com/package/ng-wizard" target="_blank">https://www.npmjs.com/package/ng-wizard</a> para crear un componente por pasos.
-        </li>
-        <li>
-          En el <strong>primer paso</strong> debes mostrar un formulario de datos generales con la siguiente información:
-          <div fxLayout="column">
-            <div fxFlex="100" class="pt-10">
-              <ul>
-                <li>Nombre</li>
-                <li>Apellido Paterno</li>
-                <li>Apellido Materno</li>
-                <li>Fecha de Nacimiento (Con un campo de selección de fecha)</li>
-                <li>Género *</li>
-                <li>Nacionalidad *</li>
-                <li>Club de Fútbol *</li>
-                <li>R.F.C. **</li>
-                <li>Ocupación</li>
-                <li>Botón para enviar información</li>
-              </ul>
-            </div>
-            
-            <div fxFlex="100" class="pt-10">
-              * Estas opciones deben alimentarse de manera dinámica utilizando los <strong>JSON</strong> que se encuentran en la carpeta <strong>"data"</strong>, también se requiere crear los modelos de datos y guardarlos en la carpeta <strong>"models"</strong>
-            </div>
-            <div fxFlex="100" class="pt-10">
-              ** Este campo solo debe aparecer si el registro que se captura es de alguien mayor a 18 años, en caso que lo sea, validar la estructura del R.F.C. antes de enviar la información
-            </div>
-          </div>
-        </li>
-        <li>
-          <div fxLayout="column">
-            <div fxFlex="100">
-              Utilizando la información capturada en el formulario, dentro del <strong>paso dos</strong> mostrar una ficha similar a la siguiente (<strong>Se tomará en cuenta el diseño implementado</strong>):
-            </div>
-            <div fxFlex="100">
-              <img src="assets/img/id-example.png">
-            </div>
-          </div>
-        </li>
-        <li>
-          Instalar la librería <a href="https://www.npmjs.com/package/jspdf" target="_blank">https://www.npmjs.com/package/jspdf</a> para crear PDF.
-        </li>
-        <li>
-          En el <strong>tercer paso</strong> del componente, desplegar la misma información del formulario del <strong>primer paso</strong> en un PDF.
-        </li>
-        <li>
-          Una vez hayas concluido tu evaluación, debes subirlo a tu propio repositorio de <strong>GitHub</strong> o <strong>GitLab</strong> y enviar el link para su revisión.
-        </li>
-      </ol>
-    </div>
-    
+  <div fxFlex="100">
+    <strong>Bienvenido a tu prueba de Desarrollador Jr. de la Federación Mexicana de Fútbol.</strong>
   </div>
-  
+  <div fxFlex="100" class="pt-10">
+    Estas son las actividades que debes realizar:
+  </div>
+  <div fxFlex="100" class="pt-10">
+    <ol>
+      <li>
+        Utilizar Angular 7 o superior.
+      </li>
+      <li>
+        Instalar la librería ng-wizard <a href="https://www.npmjs.com/package/ng-wizard" target="_blank">https://www.npmjs.com/package/ng-wizard</a> para crear un componente por pasos.
+      </li>
+      <li>
+        En el <strong>primer paso</strong> debes mostrar un formulario de datos generales con la siguiente información:
+        <div fxLayout="column">
+          <div fxFlex="100" class="pt-10">
+            <ul>
+              <li>Nombre</li>
+              <li>Apellido Paterno</li>
+              <li>Apellido Materno</li>
+              <li>Fecha de Nacimiento (Con un campo de selección de fecha)</li>
+              <li>Género *</li>
+              <li>Nacionalidad *</li>
+              <li>Club de Fútbol *</li>
+              <li>R.F.C. **</li>
+              <li>Ocupación</li>
+              <li>Botón para enviar información</li>
+            </ul>
+          </div>
+
+          <div fxFlex="100" class="pt-10">
+            * Estas opciones deben alimentarse de manera dinámica utilizando los <strong>JSON</strong> que se encuentran en la carpeta <strong>"data"</strong>, también se requiere crear los modelos de datos y guardarlos en la carpeta <strong>"models"</strong>
+          </div>
+          <div fxFlex="100" class="pt-10">
+            ** Este campo solo debe aparecer si el registro que se captura es de alguien mayor a 18 años, en caso que lo sea, validar la estructura del R.F.C. antes de enviar la información
+          </div>
+        </div>
+      </li>
+      <li>
+        <div fxLayout="column">
+          <div fxFlex="100">
+            Utilizando la información capturada en el formulario, dentro del <strong>paso dos</strong> mostrar una ficha similar a la siguiente (<strong>Se tomará en cuenta el diseño implementado</strong>):
+          </div>
+          <div fxFlex="100">
+            <img src="assets/img/id-example.png">
+          </div>
+        </div>
+      </li>
+      <li>
+        Instalar la librería <a href="https://www.npmjs.com/package/jspdf" target="_blank">https://www.npmjs.com/package/jspdf</a> para crear PDF.
+      </li>
+      <li>
+        En el <strong>tercer paso</strong> del componente, desplegar la misma información del formulario del <strong>primer paso</strong> en un PDF.
+      </li>
+      <li>
+        Una vez hayas concluido tu evaluación, debes subirlo a tu propio repositorio de <strong>GitHub</strong> o <strong>GitLab</strong> y enviar el link para su revisión.
+      </li>
+    </ol>
+  </div>
+
+</div>
+  <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+
+    <ng-wizard-step [title]="'Paso 1'" [description]="'Datos Generales'"
+                    [canEnter]="isValidTypeBoolean" [canExit]="this.final == 1">
+      <div class="col-lg-12">
+        <div class="card"  id="generaless">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i>Datos Generales
+          </div>
+          <div class="card-body">
+            <form [formGroup]="datosGenerales" class="form-horizontal">
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="nombre">Nombre</label>
+                <div class="col-md-9">
+                  <input formControlName="nombre" type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre.." autocomplete="nombre">
+                  <div *ngIf="datosGenerales.controls['nombre'].invalid && (datosGenerales.controls['nombre'].dirty || datosGenerales.controls['nombre'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['nombre'].errors.required">
+                      <p class="text-danger">Agrega el Nombre</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="paterno">Apellido Paterno</label>
+                <div class="col-md-9">
+                  <input formControlName="paterno" type="text" id="paterno" name="paterno" class="form-control" placeholder="Paterno.." autocomplete="paterno">
+                  <div *ngIf="datosGenerales.controls['paterno'].invalid && (datosGenerales.controls['paterno'].dirty || datosGenerales.controls['paterno'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['paterno'].errors.required">
+                      <p class="text-danger">Agrega el Apellido Paterno</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="materno">Apellido Materno</label>
+                <div class="col-md-9">
+                  <input formControlName="materno" type="text" id="materno" name="materno" class="form-control" placeholder="Materno.." autocomplete="materno">
+                  <div *ngIf="datosGenerales.controls['materno'].invalid && (datosGenerales.controls['materno'].dirty || datosGenerales.controls['materno'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['materno'].errors.required">
+                      <p class="text-danger">Agrega el Apellido Materno</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="fechaNacimiento">Fecha de Nacimiento</label>
+                <div class="col-md-9">
+                  <input (change)="calcAge()" formControlName="fechaNacimiento"  type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" placeholder="Fecha de Nacimiento.." autocomplete="fechaNacimiento" min="1900-01-01" max="2022-01-01">
+                  <div *ngIf="datosGenerales.controls['fechaNacimiento'].invalid && (datosGenerales.controls['fechaNacimiento'].dirty || datosGenerales.controls['fechaNacimiento'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['fechaNacimiento'].errors.required">
+                      <p class="text-danger">Agrega Fecha de Nacimiento</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label">Género</label>
+                <div class="col-md-9">
+                  <ng-select formControlName="genero" class="form-control" >
+                    <ng-option value=""></ng-option>
+                    <ng-option  *ngFor="let item of genero" [value]="item.idGenero">{{item.nombre}}</ng-option>
+                  </ng-select>
+                  <div *ngIf="datosGenerales.controls['genero'].invalid && (datosGenerales.controls['genero'].dirty || datosGenerales.controls['genero'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['genero'].errors.required">
+                      <p class="text-danger">Seleciona el Genero</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label">Nacionalidad</label>
+                <div class="col-md-9">
+                  <ng-select formControlName="nacionalidad" class="form-control" >
+                    <ng-option value=""></ng-option>
+                    <ng-option  *ngFor="let value of nacionalidades" [value]="value.id">{{value.nombre}}</ng-option>
+                  </ng-select>
+                  <div *ngIf="datosGenerales.controls['nacionalidad'].invalid && (datosGenerales.controls['nacionalidad'].dirty || datosGenerales.controls['nacionalidad'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['nacionalidad'].errors.required">
+                      <p class="text-danger">Seleciona la Nacionalidad</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label">Club de Fútbol</label>
+                <div class="col-md-9">
+                  <ng-select formControlName="club" class="form-control" >
+                    <ng-option value=""></ng-option>
+                    <ng-option  *ngFor="let value of clubes" [value]="value.id"><img src='{{value.logo}}' width="20px" height="20px"> {{value.nombre}}</ng-option>
+                  </ng-select>
+                  <div *ngIf="datosGenerales.controls['club'].invalid && (datosGenerales.controls['club'].dirty || datosGenerales.controls['club'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['club'].errors.required">
+                      <p class="text-danger">Seleciona el Club de Fútbol</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="this.rfcValidate == 1">
+                <label class="col-md-3 col-form-label" for="rfc">RFC</label>
+                <div class="col-md-9">
+                  <input formControlName="rfc" type="text" id="rfc" name="rfc" class="form-control" placeholder="RFC.." autocomplete="rfc">
+                  <div *ngIf="datosGenerales.controls['rfc'].invalid && (datosGenerales.controls['rfc'].dirty || datosGenerales.controls['rfc'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['rfc'].errors.pattern">
+                      <p class="text-danger">RFC Incorrecto, Ejemplo LUPY700407YM2</p>
+                    </div>
+                  </div>
+                  <p class="text-danger">{{this.error}}</p>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="ocupacion">Ocupación</label>
+                <div class="col-md-9">
+                  <input formControlName="ocupacion" type="text" id="ocupacion" name="ocupacion" class="form-control" placeholder="Ocupación.." autocomplete="ocupacion">
+                  <div *ngIf="datosGenerales.controls['ocupacion'].invalid && (datosGenerales.controls['ocupacion'].dirty || datosGenerales.controls['ocupacion'].touched)" class="alert">
+                    <div *ngIf="datosGenerales.controls['ocupacion'].errors.required">
+                      <p class="text-danger">Agrega tu Ocupación</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button type="button" (click)="enviarInfo()" [disabled]="!datosGenerales.valid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Enviar Información</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Paso 2'" [description]="'Ficha'">
+      <div class="col-md-12">
+        <div *ngIf="this.final == 1">
+          <div class="card tarjeta green">
+            <div class="additional">
+
+              <div class="user-card">
+                <div class="level center">
+                  FMF
+                </div>
+                <div class="points center">
+                  {{this.clubName}}
+                </div>
+                <img src="{{this.clubLogo}}" class="center" height="80" width="80">
+              </div>
+
+              <div class="more-info">
+                <h1>{{this.datosGenerales.value.nombre}}</h1>
+                <h4>{{this.datosGenerales.value.paterno}} {{this.datosGenerales.value.materno}}</h4>
+
+                <div class="coords">
+                  <span>Fecha Nacimiento: </span>
+                  <span>{{this.datosGenerales.value.fechaNacimiento | date:'dd/MM/yyyy'}}</span>
+                </div>
+
+                <div class="coords">
+                  <span>Género : </span>
+                  <span>{{this.generoName}}</span>
+                </div>
+
+                <div class="coords">
+                  <span>Nacionalidad: </span>
+                  <span>{{this.nacionalidadName}}</span>
+                </div>
+
+                <div class="coords">
+                  <span>Ocupación: </span>
+                  <span>{{this.datosGenerales.value.ocupacion}}</span>
+                </div>
+                <div class="stats">
+                  <div>
+                    <div class="value">STAFF</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="general">
+
+              <h1>{{this.datosGenerales.value.nombre}}</h1>
+              <h4>{{this.datosGenerales.value.paterno}} {{this.datosGenerales.value.materno}}</h4>
+
+              <div class="coords">
+                <span class="titulos">Fecha Nacimiento: </span>
+                <span>{{this.datosGenerales.value.fechaNacimiento | date:'dd/MM/yyyy'}}</span>
+              </div>
+
+              <div class="coords">
+                <span class="titulos">Género : </span>
+                <span>{{this.generoName}}</span>
+              </div>
+
+              <div class="coords">
+                <span class="titulos">Nacionalidad: </span>
+                <span>{{this.nacionalidadName}}</span>
+              </div>
+
+              <div class="coords">
+                <span class="titulos">Ocupación: </span>
+                <span>{{this.datosGenerales.value.ocupacion}}</span>
+              </div>
+              <div class="coords" *ngIf="edad >= 18">
+                <span class="titulos">RFC: </span>
+                <span>{{this.datosGenerales.value.rfc}}</span>
+              </div>
+
+
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </ng-wizard-step>
+
+    <ng-wizard-step [title]="'Paso 3'" [description]="'Pdf'"
+                    [canEnter]="isValidFunctionReturnsObservable.bind(this)" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+      <button (click)="pdf()" class="btn btn-primary">Descargar Pdf</button>
+    </ng-wizard-step>
+  </ng-wizard>
+
 </div>

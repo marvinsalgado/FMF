@@ -19,6 +19,11 @@
     "@angular/platform-browser": "~9.0.1",
     "@angular/platform-browser-dynamic": "~9.0.1",
     "@angular/router": "~9.0.1",
+    "@ng-select/ng-select": "^7.2.0",
+    "bootstrap": "^5.1.0",
+    "jspdf": "^2.3.1",
+    "moment": "^2.29.1",
+    "ng-wizard": "^1.3.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

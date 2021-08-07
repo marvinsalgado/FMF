@@ -1,12 +1,12 @@
 export const generos = [{
-                            id : 1,
+                            idGenero : 1,
                             nombre : 'Femenino'
                         },
                         {
-                            id : 2,
+                            idGenero : 2,
                             nombre : 'Masculino'
                         },
                         {
-                            id : 3,
+                            idGenero : 3,
                             nombre : 'Prefiero no decirlo'
                         }]
